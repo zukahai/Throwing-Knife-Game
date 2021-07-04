@@ -38,6 +38,7 @@ class game {
 
     listenKeyboard() {
         document.addEventListener("keydown", key => {
+
         })
     }
 
@@ -50,7 +51,7 @@ class game {
     loop() {
         this.update();
         this.draw();
-        setTimeout(() => this.loop(), 10);
+        setTimeout(() => this.loop(), 7);
     }
 
     update() {
@@ -86,6 +87,8 @@ class game {
             }
             this.context.restore();
         }
+
+        this.context.drawImage(swordIM, XXX - size / 4, YYY + size / 1.2, size / 2, size / 2);
 
         this.context.save();
         this.context.translate(XXX, YYY);
