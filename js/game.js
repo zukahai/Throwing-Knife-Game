@@ -44,6 +44,10 @@ class game {
 
     listenMouse() {
         document.addEventListener("mousedown", evt => {
+            if (b[Math.floor((360 - angle) / 5)]) {
+                window.alert("You Lose");
+                location.reload();
+            }
             b[Math.floor((360 - angle) / 5)] = true;
         })
     }
