@@ -3,6 +3,7 @@ let game_H = 20;
 size = 0;
 XXX = 0, YYY = 0;
 angle = 0;
+score = 0;
 var bg = new Image();
 bg.src="images/background.jpg";
 b = [];
@@ -45,10 +46,11 @@ class game {
     listenMouse() {
         document.addEventListener("mousedown", evt => {
             if (b[Math.floor((360 - angle) / 5)]) {
-                window.alert("You Lose");
+                window.alert("You Lose!" + "\n" + "Your Score: " + score);
                 location.reload();
             }
             b[Math.floor((360 - angle) / 5)] = true;
+            score++;
         })
     }
 
@@ -99,6 +101,10 @@ class game {
         this.context.rotate(this.toRadian(angle));
         this.context.drawImage(bitcoinIM, - size / 2, - size / 2, size, size);
         this.context.restore();
+
+        this.context.fillStyle = "#33FFFF";
+        this.context.font = this.getWidth() / 1.5 + 'px Stencil';
+        this.context.fillText("Score: " + score, this.getWidth(), this.getWidth());
     }
 
     clearScreen() {
