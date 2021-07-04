@@ -1,7 +1,13 @@
 let game_W = 20;
 let game_H = 20;
+size = 0;
+XXX = 0, YYY = 0;
+angle = 0;
 var bg = new Image();
 bg.src="images/background.jpg";
+
+var bitcoinIM = new Image();
+bitcoinIM.src="images/bitcoin.png";
 
 
 class game {
@@ -42,6 +48,7 @@ class game {
 
     update() {
         this.render();
+        angle++;
     }
 
     render() {
@@ -50,17 +57,23 @@ class game {
             this.canvas.height = document.documentElement.clientHeight;
             game_W = this.canvas.width;
             game_H = this.canvas.height;
+            size = 6 * this.getWidth();
+            XXX = game_W / 2;
+            YYY = game_H / 3;
         }
     }
 
     draw() {
         this.clearScreen();
+        this.drawBitcoin();
+    }
 
-        // this.context.save();
-        // this.context.translate(Xh, Yh);
-        // this.context.rotate(this.toRadian(angle - 90));
-        // this.context.drawImage(hook, - this.getWidth() / 4,- this.getWidth() / 8, this.getWidth() / 2, this.getWidth() / 2);
-        // this.context.restore();
+    drawBitcoin() {
+        this.context.save();
+        this.context.translate(XXX, YYY);
+        this.context.rotate(this.toRadian(angle));
+        this.context.drawImage(bitcoinIM, - size / 2, - size / 2, size, size);
+        this.context.restore();
     }
 
     clearScreen() {
