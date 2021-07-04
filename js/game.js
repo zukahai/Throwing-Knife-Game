@@ -5,9 +5,12 @@ XXX = 0, YYY = 0;
 angle = 0;
 var bg = new Image();
 bg.src="images/background.jpg";
-
+b = [];
 var bitcoinIM = new Image();
 bitcoinIM.src="images/bitcoin.png";
+
+var swordIM = new Image();
+swordIM.src="images/sword.png";
 
 
 class game {
@@ -21,6 +24,9 @@ class game {
         this.canvas = document.createElement("canvas");
         this.context = this.canvas.getContext("2d");
         document.body.appendChild(this.canvas);
+
+        for (let i = 0; i < 72; i++)
+            b[i] = false;
 
         this.render();
         
@@ -37,6 +43,7 @@ class game {
 
     listenMouse() {
         document.addEventListener("mousedown", evt => {
+            b[Math.floor((360 - angle) / 5)] = true;
         })
     }
 
@@ -48,7 +55,8 @@ class game {
 
     update() {
         this.render();
-        angle++;
+        angle ++;
+        angle %= 360;
     }
 
     render() {
@@ -69,6 +77,16 @@ class game {
     }
 
     drawBitcoin() {
+        for (let i = 0; i < 72; i++) {
+            this.context.save();
+            this.context.translate(XXX, YYY);
+            this.context.rotate(this.toRadian(i * 5 + angle));
+            if (b[i]) {
+                this.context.drawImage(swordIM, - size / 4, size / 4, size / 2, size / 2);
+            }
+            this.context.restore();
+        }
+
         this.context.save();
         this.context.translate(XXX, YYY);
         this.context.rotate(this.toRadian(angle));
